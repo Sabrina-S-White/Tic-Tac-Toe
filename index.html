@@ -12,15 +12,16 @@
     <div class="container">
         <div class="menu">
             <div class="buttons">
-                <button id="resetBtn">Reset</button>
-                <button id="log">log</button>
+                <button type='button' id="resetBtn">Reset Game</button>
+                <button type='button' id="log">log</button>
+                <button type='button' id="start">start</button>
             </div>
             <div class="playerContainer">
                 <div class="playerOne">
                     <h1>Player One: </h1>
                     <form class="form">
-                        <label for="name">Player One:</label>
-                        <input type="text" id="name" name="name">
+                        <label for="name1">Enter Name:</label>
+                        <input type="text" id="name1" name="name">
                         <p>Choose Your Piece:</p>
                         <label for="x">X</label>
                         <input type="radio" id="x" name="piece" checked>
@@ -30,6 +31,8 @@
                 </div>
                 <div class="playerTwo">
                     <h1>Player Two: </h1>
+                    <label for="name2">Enter Name:</label>
+                    <input type="text" id="name2" name="name">
                 </div>
             </div>
         </div>
