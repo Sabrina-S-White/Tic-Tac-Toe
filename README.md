@@ -21,7 +21,13 @@ Create a Game module to control the gameplay.
 
 
 PROGRESS THOUGHTS - NEXT STEPS 
-1. 
+1. I want to create a function that alternates which player is making moves. I think this will be amending the Playgame object, firing a check for what value X is at (0 or 1 for playerone and playertwo). 
+
+2. Create a CreatePlayer factory function that sets the name fields in the HTML (create a field that takes a name for player two as well). When the people click a button next to the name form it should remove the form and add the name in a fancy font. 
+    2a. Playertwo should have a radio button that lets you switch between computer and human. 
+    2b. These player objects should store which piece each is using. This information will be what ultimately tells PlayGame which symbol to inject into the HTML and ary. 
+    2c. - STRETCH GOAL - Create a computer AI to play against that makes random moves. 
+        2ca. Take the available spaces in the ary, then randomly choose one to play.
 
 
 
