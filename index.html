@@ -9,38 +9,59 @@
     <script defer src="./main.js"></script>
 </head>
 <body>
-    <div class="menu">
-        <button id="resetBtn">Reset</button>
-        <button id="log">log</button>
-    </div>
-    <div class="game">
-        <div class="board">
-            <div class="cell" id="cellOne">
-                <p class="cellP" id="cellP1"></p>
+    <div class="container">
+        <div class="menu">
+            <div class="buttons">
+                <button id="resetBtn">Reset</button>
+                <button id="log">log</button>
             </div>
-            <div class="cell" id="cellTwo">
-                <p class="cellP" id="cellP2"></p>
+            <div class="playerContainer">
+                <div class="playerOne">
+                    <h1>Player One: </h1>
+                    <form class="form">
+                        <label for="name">Player One:</label>
+                        <input type="text" id="name" name="name">
+                        <p>Choose Your Piece:</p>
+                        <label for="x">X</label>
+                        <input type="radio" id="x" name="piece" checked>
+                        <label for="o">O</label>
+                        <input type="radio" id="o" name="piece">
+                    </form>
+                </div>
+                <div class="playerTwo">
+                    <h1>Player Two: </h1>
+                </div>
             </div>
-            <div class="cell" id="cellThree">
-                <p class="cellP" id="cellP3"></p>
-            </div>
-            <div class="cell" id="cellFour">
-                <p class="cellP" id="cellP4"></p>
-            </div>
-            <div class="cell" id="cellFive">
-                <p class="cellP" id="cellP5"></p>
-            </div>
-            <div class="cell" id="cellSix">
-                <p class="cellP" id="cellP6"></p>
-            </div>
-            <div class="cell" id="cellSeven">
-                <p class="cellP" id="cellP7"></p>
-            </div>
-            <div class="cell" id="cellEight">
-                <p class="cellP" id="cellP8"></p>
-            </div>
-            <div class="cell" id="cellNine">
-                <p class="cellP" id="cellP9"></p>
+        </div>
+        <div class="game">
+            <div class="board">
+                <div class="cell" id="cellOne">
+                    <p class="cellP" id="cellP1"></p>
+                </div>
+                <div class="cell" id="cellTwo">
+                    <p class="cellP" id="cellP2"></p>
+                </div>
+                <div class="cell" id="cellThree">
+                    <p class="cellP" id="cellP3"></p>
+                </div>
+                <div class="cell" id="cellFour">
+                    <p class="cellP" id="cellP4"></p>
+                </div>
+                <div class="cell" id="cellFive">
+                    <p class="cellP" id="cellP5"></p>
+                </div>
+                <div class="cell" id="cellSix">
+                    <p class="cellP" id="cellP6"></p>
+                </div>
+                <div class="cell" id="cellSeven">
+                    <p class="cellP" id="cellP7"></p>
+                </div>
+                <div class="cell" id="cellEight">
+                    <p class="cellP" id="cellP8"></p>
+                </div>
+                <div class="cell" id="cellNine">
+                    <p class="cellP" id="cellP9"></p>
+                </div>
             </div>
         </div>
     </div>
