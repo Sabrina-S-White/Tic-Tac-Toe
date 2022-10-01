@@ -11,9 +11,30 @@ const Gameboard = (() => {
 
     const logAry = document.getElementById('log');
 
+    const p1NameP = document.getElementById('p1NameP');
+    const name1Label = document.getElementById('name1Label');
+    const name1 = document.getElementById('name1');
+
+    const p2NameP = document.getElementById('p2NameP');
+    const name2Label = document.getElementById('name2Label');
+    const name2 = document.getElementById('name2');
+
     const checkForWinner = () => {
         for (i = 0; i < ary.length; i++) {
             
+        }
+    }
+
+    const changeName = () => {
+        if (name1.value != '' && name2.value != '') {
+            name1Label.style.display = 'none';
+            name1.style.display = 'none';
+            p1NameP.innerHTML = `${document.getElementById('name1').value}`;
+            p2NameP.style.display = 'none';
+            name2.style.display = 'none';
+            name2Label.innerHTML = `${document.getElementById('name2').value}`;
+        } else {
+            alert('Error, please enter names.');
         }
     }
 
@@ -32,7 +53,7 @@ const Gameboard = (() => {
         })
     };
 
-    return { checkForWinner, ary, log, startGame, x };
+    return { checkForWinner, ary, log, startGame, x, changeName };
 })();
 
 const PlayGame = (() => {
@@ -272,4 +293,5 @@ start.addEventListener('click', () => {
     p1 = Player(document.getElementById('name1').value);
     p2 = Player(document.getElementById('name2').value);
     Gameboard.startGame();
+    Gameboard.changeName();
 })

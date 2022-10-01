@@ -20,8 +20,11 @@
                 <div class="playerOne">
                     <h1>Player One: </h1>
                     <form class="form">
-                        <label for="name1">Enter Name:</label>
-                        <input type="text" id="name1" name="name">
+                        <div class="p1Name">
+                            <label for="name1" id="name1Label">Enter Name:</label>
+                            <input type="text" id="name1" name="name">
+                            <p id="p1NameP"></p>
+                        </div>
                         <p>Choose Your Piece:</p>
                         <label for="x">X</label>
                         <input type="radio" id="x" name="piece" checked>
@@ -31,8 +34,15 @@
                 </div>
                 <div class="playerTwo">
                     <h1>Player Two: </h1>
-                    <label for="name2">Enter Name:</label>
-                    <input type="text" id="name2" name="name">
+                    <div class="p2Name">
+                        <label for="name2" id="name2Label">Enter Name:</label>
+                        <input type="text" id="name2" name="name">
+                        <p id="p2NameP"></p>
+                        <label for="comp">Computer</label>
+                        <input type="radio" id="comp" name="comp" checked>
+                        <label for="human">Human</label>
+                        <input type="radio" id="human" name="human">
+                    </div>
                 </div>
             </div>
         </div>

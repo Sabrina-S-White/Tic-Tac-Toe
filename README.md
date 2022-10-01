@@ -5,13 +5,11 @@ A Tic Tac Toe game made for The Odin Project lesson on Javascript modules and fa
 DONE - Create a Gameboard module that holds a gameBoard array. 
     DONE - Return the array so the Game module can mark played squares. 
     Create a function that checks the board after each move. 
-        If 3 in a row, winner is declared. 
-        If no available moves, tie is declared.
+        
     DONE - Create a reset game function that resets all DOM elements. 
 
 Create a Players factory function to generate the two player objects.
     DONE - X and O are players. Let user select which they want, two players, or computer takes the other. 
-    Let players enter their name(s).
 
 Create a Game module to control the gameplay.
     Game starts, and alternates between players. X starts. 
@@ -23,8 +21,15 @@ Create a Game module to control the gameplay.
 PROGRESS THOUGHTS - NEXT STEPS 
 DONE 1. I want to create a function that alternates which player is making moves. I think this will be amending the Playgame object, firing a check for what value X is at (0 or 1 for playerone and playertwo). 
 
-2. Create a CreatePlayer factory function that sets the name fields in the HTML (create a field that takes a name for player two as well). When the people click a button next to the name form it should remove the form and add the name in a fancy font. I'm going to add a function to Gameboard that replaces the form fields with the names, but the form fields need to be hidden not removed so when the game is reset it still keeps the old names. 
-    2a. Playertwo should have a radio button that lets you switch between computer and human. 
-    2b. These player objects should store which piece each is using. This information will be what ultimately tells PlayGame which symbol to inject into the HTML and ary. 
-    2c. - STRETCH GOAL - Create a computer AI to play against that makes random moves. 
+DONE - 2. Create a CreatePlayer factory function that sets the name fields in the HTML (create a field that takes a name for player two as well). When the people click a button next to the name form it should remove the form and add the name in a fancy font. I'm going to add a function to Gameboard that replaces the form fields with the names, but the form fields need to be hidden not removed so when the game is reset it still keeps the old names. 
+
+DONE - 1. Playertwo should have a radio button that lets you switch between computer and human. 
+
+1. These player objects should store which piece each is using. This information will be what ultimately tells PlayGame which symbol to inject into the HTML and ary. 
+    
+1.  - STRETCH GOAL - Create a computer AI to play against that makes random moves. 
         2ca. Take the available spaces in the ary, then randomly choose one to play.
+
+1. Create a check for winner function in Gameboard. 
+    If 3 in a row, winner is declared. 
+    If no available moves, tie is declared.
