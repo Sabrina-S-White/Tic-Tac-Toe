@@ -12,68 +12,77 @@
     <div class="container">
         <div class="menu">
             <div class="buttons">
+                <button type='button' id="start">Start Game</button>
                 <button type='button' id="resetBtn">Reset Game</button>
-                <button type='button' id="log">log</button>
-                <button type='button' id="start">start</button>
             </div>
             <div class="playerContainer">
-                <div class="playerOne">
+                <div class="player">
                     <h1>Player One: </h1>
                     <form class="form">
                         <div class="p1Name">
-                            <label for="name1" id="name1Label">Enter Name:</label>
-                            <input type="text" id="name1" name="name">
-                            <p id="p1NameP"></p>
-                        </div>
-                        <p>Choose Your Piece:</p>
-                        <label for="x">X</label>
-                        <input type="radio" id="x" name="piece" checked>
-                        <label for="o">O</label>
-                        <input type="radio" id="o" name="piece">
+                            <div class="nameDiv">
+                                <label for="name1" id="name1Label">Enter Name:</label>
+                                <input type="text" id="name1" name="name">
+                                <p id="p1NameP"></p>
+                            </div>
+                            <div class="radio">
+                                <p>Choose Your Piece:</p>
+                                <label for="x">X</label>
+                                <input type="radio" id="x" name="piece" checked>
+                                <label for="o">O</label>
+                                <input type="radio" id="o" name="piece">
+                            </div>
+                    </div>
                     </form>
                 </div>
-                <div class="playerTwo">
+                <div class="player">
                     <h1>Player Two: </h1>
                     <div class="p2Name">
-                        <label for="name2" id="name2Label">Enter Name:</label>
-                        <input type="text" id="name2" name="name">
-                        <p id="p2NameP"></p>
-                        <label for="comp">Computer</label>
-                        <input type="radio" id="comp" name="comp" checked>
-                        <label for="human">Human</label>
-                        <input type="radio" id="human" name="human">
+                        <div class="nameDiv">
+                            <label for="name2" id="name2Label">Enter Name:</label>
+                            <input type="text" id="name2" name="name">
+                            <p id="p2NameP"></p>
+                        </div>
+                        <div class="radio">
+                            <label for="comp">Computer</label>
+                            <input type="radio" id="comp" name="p2Switch" checked>
+                            <label for="human">Human</label>
+                            <input type="radio" id="human" name="p2Switch">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="game">
-            <div class="board">
-                <div class="cell" id="cellOne">
-                    <p class="cellP" id="cellP1"></p>
-                </div>
-                <div class="cell" id="cellTwo">
-                    <p class="cellP" id="cellP2"></p>
-                </div>
-                <div class="cell" id="cellThree">
-                    <p class="cellP" id="cellP3"></p>
-                </div>
-                <div class="cell" id="cellFour">
-                    <p class="cellP" id="cellP4"></p>
-                </div>
-                <div class="cell" id="cellFive">
-                    <p class="cellP" id="cellP5"></p>
-                </div>
-                <div class="cell" id="cellSix">
-                    <p class="cellP" id="cellP6"></p>
-                </div>
-                <div class="cell" id="cellSeven">
-                    <p class="cellP" id="cellP7"></p>
-                </div>
-                <div class="cell" id="cellEight">
-                    <p class="cellP" id="cellP8"></p>
-                </div>
-                <div class="cell" id="cellNine">
-                    <p class="cellP" id="cellP9"></p>
+            <p id="winText"></p>
+                <div class="board masc" id='board'>
+                        <div class="cell" id="cellOne">
+                            <p class="cellP" id="cellP1"></p>
+                        </div>
+                        <div class="cell" id="cellTwo">
+                            <p class="cellP" id="cellP2"></p>
+                        </div>
+                        <div class="cell" id="cellThree">
+                            <p class="cellP" id="cellP3"></p>
+                        </div>
+                        <div class="cell" id="cellFour">
+                            <p class="cellP" id="cellP4"></p>
+                        </div>
+                        <div class="cell" id="cellFive">
+                            <p class="cellP" id="cellP5"></p>
+                        </div>
+                        <div class="cell" id="cellSix">
+                            <p class="cellP" id="cellP6"></p>
+                        </div>
+                        <div class="cell" id="cellSeven">
+                            <p class="cellP" id="cellP7"></p>
+                        </div>
+                        <div class="cell" id="cellEight">
+                            <p class="cellP" id="cellP8"></p>
+                        </div>
+                        <div class="cell" id="cellNine">
+                            <p class="cellP" id="cellP9"></p>
+                        </div>
                 </div>
             </div>
         </div>

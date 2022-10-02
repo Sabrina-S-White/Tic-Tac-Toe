@@ -2,6 +2,7 @@
 
 A Tic Tac Toe game made for The Odin Project lesson on Javascript modules and factory functions. 
 
+INITIAL DESIGN - TO DO
 DONE - Create a Gameboard module that holds a gameBoard array. 
     DONE - Return the array so the Game module can mark played squares. 
     Create a function that checks the board after each move. 
@@ -25,11 +26,11 @@ DONE - 2. Create a CreatePlayer factory function that sets the name fields in th
 
 DONE - 1. Playertwo should have a radio button that lets you switch between computer and human. 
 
-1. These player objects should store which piece each is using. This information will be what ultimately tells PlayGame which symbol to inject into the HTML and ary. 
+DONE - 1. These player objects should store which piece each is using. This information will be what ultimately tells PlayGame which symbol to inject into the HTML and ary. 
     
 1.  - STRETCH GOAL - Create a computer AI to play against that makes random moves. 
         2ca. Take the available spaces in the ary, then randomly choose one to play.
 
-1. Create a check for winner function in Gameboard. 
+DONE - 1. Create a check for winner function in Gameboard. 
     If 3 in a row, winner is declared. 
     If no available moves, tie is declared.

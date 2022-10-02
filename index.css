@@ -1,8 +1,18 @@
+:root {
+    --rusViolet: 35, 25, 66;
+    --purpNavy: 94, 84, 142;
+    --mountMaj: 159, 134, 192;
+    --lilac: 190, 149, 196;
+    --pinkLav: 224, 177, 203;
+    --text: 237, 242, 251;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-size: 16px;
+    color: rgb(var(--text));
 }
 
 body {
@@ -11,7 +21,22 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: darkslategrey;
+    background-color: rgb(var(--rusViolet));
+}
+
+button {
+    height: 40px;
+    width: 100px;
+    border-radius: 50%;
+    background-color: rgb(var(--pinkLav));
+    border: none;
+    color: black;
+}
+
+button:hover {
+    background-color: rgb(var(--lilac));
+    color: #fff;
+    cursor: pointer;
 }
 
 .container {
@@ -24,42 +49,45 @@ body {
 }
 
 .menu {
-    height: 30%;
+    height: 35%;
     width: 100%;
+    border-radius: 15% 85% 29% 71% / 78% 14% 86% 22%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 50px;
-    padding: 6rem;
-    background-color: steelblue;
+    gap: 10px;
+    padding: 100px;
+    background-color: rgb(Var(--mountMaj));
 }
 
 .playerContainer {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
 }
 
-.playerOne {
-    background-color:aliceblue;
-    padding: 10px 30px;
-    border-radius: 10px;
-}
-
-.playerTwo {
-    background-color:aliceblue;
-    padding: 10px 30px;
-    border-radius: 10px;
+.player {
+    background-color:rgb(var(--purpNavy));
+    padding: 20px 30px;
+    border-radius: 15% 85% 29% 71% / 78% 14% 86% 22% ;
+    width: max(30% 350px);
 }
 
 .game {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100%;
     width: 100%;
 }
+
+.masc {
+    filter: blur(3px) grayscale(100%);
+    opacity: 0.6;
+    pointer-events: none;
+  }
 
 .board {
     display: grid;
@@ -68,11 +96,11 @@ gap: 80px;
     height: 300px;
     width: 300px;
     gap: 10px;
-    background-color: darkgray;
+    background-color: rgb(var(--lilac));
 }
 
 .cell {
-    background-color: aquamarine;
+    background-color: rgb(var(--purpNavy));
     width: 100%;
     height: 100%;
     display: flex;
@@ -86,5 +114,24 @@ gap: 80px;
     font-size: 5rem;
     display: flex;
     justify-content: center;
+    align-items: center;
+    color: rgb(var(--rusViolet));
+}
+
+.p1Name {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.p2Name {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.nameDiv {
+    display: flex;
+    gap: 10px;
     align-items: center;
 }

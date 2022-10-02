@@ -5,12 +5,11 @@ const Gameboard = (() => {
     let x = 0;
     
     //Array to hold game moves
-        let ary = ['','','','','','','','',''];
+    let ary = ['','','','','','','','',''];
     
     const cells = document.querySelectorAll('.cellP')
-
-    const logAry = document.getElementById('log');
-
+    const board = document.getElementById('board');
+    const winText = document.getElementById('winText');
     const p1NameP = document.getElementById('p1NameP');
     const name1Label = document.getElementById('name1Label');
     const name1 = document.getElementById('name1');
@@ -20,40 +19,86 @@ const Gameboard = (() => {
     const name2 = document.getElementById('name2');
 
     const checkForWinner = () => {
-        for (i = 0; i < ary.length; i++) {
-            
-        }
+        if (ary[0] == 'X' && ary[1] == 'X' && ary[2] == 'X' ||
+            ary[3] == 'X' && ary[4] == 'X' && ary[5] == 'X' ||
+            ary[6] == 'X' && ary[7] == 'X' && ary[8] == 'X' ||
+            ary[0] == 'X' && ary[3] == 'X' && ary[6] == 'X' ||
+            ary[1] == 'X' && ary[4] == 'X' && ary[7] == 'X' ||
+            ary[2] == 'X' && ary[5] == 'X' && ary[8] == 'X' ||
+            ary[0] == 'X' && ary[4] == 'X' && ary[8] == 'X' ||
+            ary[2] == 'X' && ary[4] == 'X' && ary[6] == 'X') {
+            document.getElementById('winText').innerHTML = 'X is the winner!'
+        } else if (
+            ary[0] == 'O' && ary[1] == 'O' && ary[2] == 'O' ||
+            ary[3] == 'O' && ary[4] == 'O' && ary[5] == 'O' ||
+            ary[6] == 'O' && ary[7] == 'O' && ary[8] == 'O' ||
+            ary[0] == 'O' && ary[3] == 'O' && ary[6] == 'O' ||
+            ary[1] == 'O' && ary[4] == 'O' && ary[7] == 'O' ||
+            ary[2] == 'O' && ary[5] == 'O' && ary[8] == 'O' ||
+            ary[0] == 'O' && ary[4] == 'O' && ary[8] == 'O' ||
+            ary[2] == 'O' && ary[4] == 'O' && ary[6] == 'O') {
+                document.getElementById('winText').innerHTML = 'O is the winner!'
+            } else if (ary[0] != '' && ary[1] != '' && ary[2] != '' && ary[3] != '' && ary[4] != '' && ary[5] != '' && ary[6] != '' && ary[7] != '' && ary[8] != '') {
+                 document.getElementById('winText').innerHTML = 'Tie, press Reset Game to play again.'
+            }
     }
 
     const changeName = () => {
-        if (name1.value != '' && name2.value != '') {
+        if (document.getElementById('comp').checked && name1.value != '') {
+            name1Label.style.display = 'none';
+            name1.style.display = 'none';
+            p1NameP.innerHTML = `${document.getElementById('name1').value}`;
+            p2NameP.style.display = 'none';
+            name2.style.display = 'none';
+            name2Label.innerHTML = 'Computer';
+
+            cells.forEach(cell => {
+                cell.textContent = '';
+            },
+            ary.splice(0, 9));
+            ary.push('','','','','','','','','');
+            winText.innerHTML = '';
+            board.classList.remove('masc');
+        } else if (name1.value != '' && name2.value != '') {
             name1Label.style.display = 'none';
             name1.style.display = 'none';
             p1NameP.innerHTML = `${document.getElementById('name1').value}`;
             p2NameP.style.display = 'none';
             name2.style.display = 'none';
             name2Label.innerHTML = `${document.getElementById('name2').value}`;
+
+            cells.forEach(cell => {
+                cell.textContent = '';
+            },
+            ary.splice(0, 9));
+            ary.push('','','','','','','','','');
+            winText.innerHTML = '';
+            board.classList.remove('masc');
         } else {
             alert('Error, please enter names.');
         }
     }
 
-    const startGame = () => {
+    const switchToHuman = () => {
+        document.getElementById('human').addEventListener('click', () => {
+            p2NameP.style.display = 'flex';
+            name2.style.display = 'flex';
+            name2Label.innerHTML = 'Enter Name:';
+        })
+    }
+
+    const resetGame = () => {
         cells.forEach(cell => {
             cell.textContent = '';
         },
         ary.splice(0, 9));
         ary.push('','','','','','','','','');
-        return;
+        winText.innerHTML = '';
+        board.classList.remove('masc');
+        
     }
 
-    const log = () => {
-        logAry.addEventListener('click', () => {
-            console.log(ary)
-        })
-    };
-
-    return { checkForWinner, ary, log, startGame, x, changeName };
+    return { checkForWinner, ary, resetGame, x, changeName, switchToHuman, checkForWinner };
 })();
 
 const PlayGame = (() => {
@@ -96,6 +141,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 1;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellTwo.id) {
                         if (Gameboard.ary[1] == '') {
                         Gameboard.ary.splice(1, 1, 'X');
@@ -104,6 +150,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 1;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellThree.id) {
                         if (Gameboard.ary[2] == '') {
                         Gameboard.ary.splice(2, 1, 'X');
@@ -112,6 +159,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 1;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellFour.id) {
                         if (Gameboard.ary[3] == '') {
                         Gameboard.ary.splice(3, 1, 'X');
@@ -120,6 +168,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 1;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellFive.id) {
                         if (Gameboard.ary[4] == '') {
                         Gameboard.ary.splice(4, 1, 'X');
@@ -128,6 +177,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 1;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellSix.id) {
                         if (Gameboard.ary[5] == '') {
                         Gameboard.ary.splice(5, 1, 'X');
@@ -136,6 +186,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 1;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellSeven.id) {
                         if (Gameboard.ary[6] == '') {
                         Gameboard.ary.splice(6, 1, 'X');
@@ -144,6 +195,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 1;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellEight.id) {
                         if (Gameboard.ary[7] == '') {
                         Gameboard.ary.splice(7, 1, 'X');
@@ -152,6 +204,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 1;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellNine.id) {
                         if (Gameboard.ary[8] == '') {
                         Gameboard.ary.splice(8, 1, 'X');
@@ -160,6 +213,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 1;
+                        Gameboard.checkForWinner();
                     }
                 } else if (Gameboard.x == 1) {
                     if(cell.id === cellOne.id) {
@@ -170,6 +224,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 0;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellTwo.id) {
                         if (Gameboard.ary[1] == '') {
                         Gameboard.ary.splice(1, 1, 'O');
@@ -178,6 +233,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 0;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellThree.id) {
                         if (Gameboard.ary[2] == '') {
                         Gameboard.ary.splice(2, 1, 'O');
@@ -186,6 +242,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 0;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellFour.id) {
                         if (Gameboard.ary[3] == '') {
                         Gameboard.ary.splice(3, 1, 'O');
@@ -194,6 +251,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 0;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellFive.id) {
                         if (Gameboard.ary[4] == '') {
                         Gameboard.ary.splice(4, 1, 'O');
@@ -202,6 +260,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 0;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellSix.id) {
                         if (Gameboard.ary[5] == '') {
                         Gameboard.ary.splice(5, 1, 'O');
@@ -210,6 +269,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 0;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellSeven.id) {
                         if (Gameboard.ary[6] == '') {
                         Gameboard.ary.splice(6, 1, 'O');
@@ -218,6 +278,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 0;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellEight.id) {
                         if (Gameboard.ary[7] == '') {
                         Gameboard.ary.splice(7, 1, 'O');
@@ -226,6 +287,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 0;
+                        Gameboard.checkForWinner();
                     } else if (cell.id === cellNine.id) {
                         if (Gameboard.ary[8] == '') {
                         Gameboard.ary.splice(8, 1, 'O');
@@ -234,6 +296,7 @@ const PlayGame = (() => {
                             return;
                         }
                         Gameboard.x = 0;
+                        Gameboard.checkForWinner();
                     }
                 }
             })
@@ -278,11 +341,12 @@ const Player = (name, piece) => {
 
     
 }
-Gameboard.log();
+
+Gameboard.switchToHuman();
 PlayGame.click();
 
 reset.addEventListener('click', () => {
-    Gameboard.startGame();
+    Gameboard.resetGame();
     Gameboard.x = 0;
     p1 = Player(document.getElementById('name1').value);
     p2 = Player(document.getElementById('name2').value);
@@ -292,6 +356,5 @@ reset.addEventListener('click', () => {
 start.addEventListener('click', () => {
     p1 = Player(document.getElementById('name1').value);
     p2 = Player(document.getElementById('name2').value);
-    Gameboard.startGame();
     Gameboard.changeName();
 })
