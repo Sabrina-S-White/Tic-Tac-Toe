@@ -33,7 +33,7 @@ button {
     color: black;
 }
 
-button:hover {
+.hov:hover {
     background-color: rgb(var(--lilac));
     color: #fff;
     cursor: pointer;
@@ -81,6 +81,20 @@ button:hover {
     align-items: center;
     height: 100%;
     width: 100%;
+    gap: 20px;
+}
+
+#winText {
+    height: 80px;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    background-color: rgb(var(--mountMaj));
+    margin: 20px;
+    border-radius: 15% 85% 29% 71% / 78% 14% 86% 22% ;
+    font-style: italic;
 }
 
 .masc {
@@ -134,4 +148,12 @@ button:hover {
     display: flex;
     gap: 10px;
     align-items: center;
+}
+
+#name1 {
+    color: darkslategray;
+}
+
+#name2 {
+    color: darkslategray;
 }

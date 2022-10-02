@@ -2,8 +2,6 @@ const reset = document.getElementById('resetBtn');
 const start = document.getElementById('start');
 
 const Gameboard = (() => {
-    let x = 0;
-    
     //Array to hold game moves
     let ary = ['','','','','','','','',''];
     
@@ -27,7 +25,10 @@ const Gameboard = (() => {
             ary[2] == 'X' && ary[5] == 'X' && ary[8] == 'X' ||
             ary[0] == 'X' && ary[4] == 'X' && ary[8] == 'X' ||
             ary[2] == 'X' && ary[4] == 'X' && ary[6] == 'X') {
-            document.getElementById('winText').innerHTML = 'X is the winner!'
+            // Need to add in logic that checks which piece each player is in PlayGame and then provide the appropriate winning text. Also need to send a ping to PlayGame that we should track the win and up the round counter. 
+            
+                document.getElementById('winText').innerHTML = `${document.getElementById('name1').value}` + ' is the winner!'
+                board.classList.add('masc');
         } else if (
             ary[0] == 'O' && ary[1] == 'O' && ary[2] == 'O' ||
             ary[3] == 'O' && ary[4] == 'O' && ary[5] == 'O' ||
@@ -37,10 +38,11 @@ const Gameboard = (() => {
             ary[2] == 'O' && ary[5] == 'O' && ary[8] == 'O' ||
             ary[0] == 'O' && ary[4] == 'O' && ary[8] == 'O' ||
             ary[2] == 'O' && ary[4] == 'O' && ary[6] == 'O') {
-                document.getElementById('winText').innerHTML = 'O is the winner!'
-            } else if (ary[0] != '' && ary[1] != '' && ary[2] != '' && ary[3] != '' && ary[4] != '' && ary[5] != '' && ary[6] != '' && ary[7] != '' && ary[8] != '') {
-                 document.getElementById('winText').innerHTML = 'Tie, press Reset Game to play again.'
-            }
+            document.getElementById('winText').innerHTML = 'O is the winner!'
+            board.classList.add('masc');
+        } else if (ary[0] != '' && ary[1] != '' && ary[2] != '' && ary[3] != '' && ary[4] != '' && ary[5] != '' && ary[6] != '' && ary[7] != '' && ary[8] != '') {
+                document.getElementById('winText').innerHTML = 'Tie, press Reset Game to play again.'
+        }
     }
 
     const changeName = () => {
@@ -84,6 +86,14 @@ const Gameboard = (() => {
             p2NameP.style.display = 'flex';
             name2.style.display = 'flex';
             name2Label.innerHTML = 'Enter Name:';
+            name2.removeAttribute('disabled');
+            start.classList.remove('masc');
+        })
+    }
+
+    const switchToComp = () => {
+        document.getElementById('comp').addEventListener('click', () => {
+            name2.setAttribute('disabled', '');
         })
     }
 
@@ -98,11 +108,19 @@ const Gameboard = (() => {
         
     }
 
-    return { checkForWinner, ary, resetGame, x, changeName, switchToHuman, checkForWinner };
+    return { checkForWinner, ary, resetGame, changeName, switchToHuman, checkForWinner, switchToComp };
 })();
 
 const PlayGame = (() => {
+    // Counter to keep track of which piece to play next
     let x = 0;
+
+    // Variables to control the flow of the game
+    let round = 0;
+    let p1Wins = 0;
+    let p2Wins = 0;
+    let playerX = 1;
+    let playerO = 0;
 
     //Query selecter to listen to all game cells.
     const cells = document.querySelectorAll('.cell')
@@ -118,7 +136,7 @@ const PlayGame = (() => {
         const cellEight = document.getElementById('cellEight');
         const cellNine = document.getElementById('cellNine');
 
-    // Game tile <p> elements to inject HTML into.
+    // Game tile <p> elements to add HTML into.
         const cellP1 = document.getElementById('cellP1');
         const cellP2 = document.getElementById('cellP2');
         const cellP3 = document.getElementById('cellP3');
@@ -128,11 +146,15 @@ const PlayGame = (() => {
         const cellP7 = document.getElementById('cellP7');
         const cellP8 = document.getElementById('cellP8');
         const cellP9 = document.getElementById('cellP9');
+    
+    const gameTracker = () => {
+
+    }
 
     const click = () => {
         cells.forEach(cell => {
             cell.addEventListener('click', () => {
-                if (Gameboard.x == 0) {
+                if (x == 0) {
                     if(cell.id === cellOne.id) {
                         if (Gameboard.ary[0] == '') {
                         Gameboard.ary.splice(0, 1, 'X');
@@ -140,7 +162,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 1;
+                        x = 1;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellTwo.id) {
                         if (Gameboard.ary[1] == '') {
@@ -149,7 +171,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 1;
+                        x = 1;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellThree.id) {
                         if (Gameboard.ary[2] == '') {
@@ -158,7 +180,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 1;
+                        x = 1;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellFour.id) {
                         if (Gameboard.ary[3] == '') {
@@ -167,7 +189,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 1;
+                        x = 1;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellFive.id) {
                         if (Gameboard.ary[4] == '') {
@@ -176,7 +198,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 1;
+                        x = 1;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellSix.id) {
                         if (Gameboard.ary[5] == '') {
@@ -185,7 +207,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 1;
+                        x = 1;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellSeven.id) {
                         if (Gameboard.ary[6] == '') {
@@ -194,7 +216,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 1;
+                        x = 1;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellEight.id) {
                         if (Gameboard.ary[7] == '') {
@@ -203,7 +225,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 1;
+                        x = 1;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellNine.id) {
                         if (Gameboard.ary[8] == '') {
@@ -212,10 +234,10 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 1;
+                        x = 1;
                         Gameboard.checkForWinner();
                     }
-                } else if (Gameboard.x == 1) {
+                } else if (x == 1) {
                     if(cell.id === cellOne.id) {
                         if (Gameboard.ary[0] == '') {
                         Gameboard.ary.splice(0, 1, 'O');
@@ -223,7 +245,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 0;
+                        x = 0;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellTwo.id) {
                         if (Gameboard.ary[1] == '') {
@@ -232,7 +254,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 0;
+                        x = 0;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellThree.id) {
                         if (Gameboard.ary[2] == '') {
@@ -241,7 +263,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 0;
+                        x = 0;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellFour.id) {
                         if (Gameboard.ary[3] == '') {
@@ -250,7 +272,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 0;
+                        x = 0;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellFive.id) {
                         if (Gameboard.ary[4] == '') {
@@ -259,7 +281,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 0;
+                        x = 0;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellSix.id) {
                         if (Gameboard.ary[5] == '') {
@@ -268,7 +290,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 0;
+                        x = 0;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellSeven.id) {
                         if (Gameboard.ary[6] == '') {
@@ -277,7 +299,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 0;
+                        x = 0;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellEight.id) {
                         if (Gameboard.ary[7] == '') {
@@ -286,7 +308,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 0;
+                        x = 0;
                         Gameboard.checkForWinner();
                     } else if (cell.id === cellNine.id) {
                         if (Gameboard.ary[8] == '') {
@@ -295,7 +317,7 @@ const PlayGame = (() => {
                         } else {
                             return;
                         }
-                        Gameboard.x = 0;
+                        x = 0;
                         Gameboard.checkForWinner();
                     }
                 }
@@ -306,9 +328,6 @@ const PlayGame = (() => {
 })();
 
 const Player = (name, piece) => {
-    const p1Btn = document.getElementById('p1Name');
-    const p2Btn = document.getElementById('p2Name');
-
     const getName = () => {
         name1 = document.getElementById('name1').value;
         name2 = document.getElementById('name2').value;
@@ -338,11 +357,11 @@ const Player = (name, piece) => {
     const p2Piece = p2p();
     
     return { name, p1Piece, p2Piece }
-
-    
 }
 
+//Funnctions and button event listeners 
 Gameboard.switchToHuman();
+Gameboard.switchToComp();
 PlayGame.click();
 
 reset.addEventListener('click', () => {
@@ -357,4 +376,5 @@ start.addEventListener('click', () => {
     p1 = Player(document.getElementById('name1').value);
     p2 = Player(document.getElementById('name2').value);
     Gameboard.changeName();
+    start.classList.add('masc');
 })

@@ -27,7 +27,14 @@ DONE - 2. Create a CreatePlayer factory function that sets the name fields in th
 DONE - 1. Playertwo should have a radio button that lets you switch between computer and human. 
 
 DONE - 1. These player objects should store which piece each is using. This information will be what ultimately tells PlayGame which symbol to inject into the HTML and ary. 
-    
+
+1. Make player 1 X by default, when reset game is clicked, switch X and O for player 1 and 2
+    Game counter variable in GameBoard. This counts up to 10, alternating X and O for players between games. Make a score display as well and text to declare the eventual winner of the BO10. 
+
+DONE - 1. Change text color in name input fields 
+
+DONE - 1. Make winner text popup look prettier
+
 1.  - STRETCH GOAL - Create a computer AI to play against that makes random moves. 
         2ca. Take the available spaces in the ary, then randomly choose one to play.
 
