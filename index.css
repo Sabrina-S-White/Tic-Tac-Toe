@@ -63,15 +63,19 @@ button {
 
 .playerContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr 2fr;
     gap: 80px;
+    justify-items: center;
+    align-items: center;
 }
 
 .player {
     background-color:rgb(var(--purpNavy));
     padding: 20px 30px;
     border-radius: 15% 85% 29% 71% / 78% 14% 86% 22% ;
-    width: max(30% 350px);
+    width: 350px;
+    display: flex; 
+    flex-direction: column;
 }
 
 .game {
@@ -156,4 +160,52 @@ button {
 
 #name2 {
     color: darkslategray;
+}
+
+.roundCounter {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(Var(--purpNavy));
+    border-radius: 15% 85% 29% 71% / 78% 14% 86% 22%;
+    resize: none;
+}
+
+.roundCounter,
+.roundCounter p {
+    font-size: 1.6rem;
+    font-style: italic;
+    display: flex;  
+}
+
+.lowerGame {
+    display: grid; 
+    width: 100%;
+    grid-template-columns: 1fr 2fr 1fr;
+    justify-items: center;
+}
+
+.scoreBoard {
+    height: 60%;
+    width: 80%;
+    background-color: rgb(Var(--mountMaj));
+    display: flex;
+    justify-content: space-evenly;
+    border-radius: 15% 85% 29% 71% / 78% 14% 86% 22% ;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score {
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.scoreDiv,
+.scoreDiv p {
+    font-size: 2rem;
+    font-style: italic;
+    display: flex;  
 }
