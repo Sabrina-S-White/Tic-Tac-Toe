@@ -28,7 +28,7 @@ DONE - 1. Playertwo should have a radio button that lets you switch between comp
 
 DONE - 1. These player objects should store which piece each is using. This information will be what ultimately tells PlayGame which symbol to inject into the HTML and ary. 
 
-1. Make player 1 X by default, when reset game is clicked, switch X and O for player 1 and 2
+DONE - 1. Make player 1 X by default, when reset game is clicked, switch X and O for player 1 and 2
     Game counter variable in GameBoard. This counts up to 10, alternating X and O for players between games. Make a score display as well and text to declare the eventual winner of the BO10. 
 
 DONE - 1. Change text color in name input fields 

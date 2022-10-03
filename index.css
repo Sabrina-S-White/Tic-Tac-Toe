@@ -90,7 +90,7 @@ button {
 
 #winText {
     height: 80px;
-    width: 600px;
+    width: 70%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -208,4 +208,47 @@ button {
     font-size: 2rem;
     font-style: italic;
     display: flex;  
+}
+
+#gameRestart {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(var(--rusViolet), 0.7);
+    z-index: 10;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.restartHov {
+    height: 50%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center; 
+    background-color: rgb(var(--mountMaj));
+    border-radius: 15% 85% 29% 71% / 78% 14% 86% 22% ;
+}
+
+.gameWinTextDiv {
+    border-radius: 15% 85% 29% 71% / 78% 14% 86% 22% ;
+    background-color: rgb(var(--rusViolet));
+    height: 25%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.gameWinTextDiv p {
+    font-size: 2rem;
+}
+
+#gameRestartBtn {
+        height: 15%;
+        width: 25%;
+        font-size: 1.3rem;
 }

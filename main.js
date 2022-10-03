@@ -1,5 +1,7 @@
 const reset = document.getElementById('resetBtn');
 const start = document.getElementById('start');
+const restartBtn = document.getElementById('gameRestartBtn');
+const restartDiv = document.getElementById('gameRestart');
 
 const Gameboard = (() => {
     // Variables to control the flow of the game
@@ -39,21 +41,21 @@ const Gameboard = (() => {
             ary[2] == 'X' && ary[4] == 'X' && ary[6] == 'X') {
             // Need to add in logic that checks which piece each player is in PlayGame and then provide the appropriate winning text. Also need to send a ping to PlayGame that we should track the win and up the round counter. 
             if (Gameboard.playerX == 0) {
-                document.getElementById('winText').innerHTML = `${document.getElementById('name1').value}` + ' is the winner of round ' + `${round}` + '!';
+                document.getElementById('winText').innerHTML = `${document.getElementById('name1').value}` + ' is the winner of round ' + `${Gameboard.round}` + '!';
                 board.classList.add('masc');
-                ++p1Wins;
+                ++Gameboard.p1Wins;
                 Gameboard.playerX = 1;
-                ++round;
+                ++Gameboard.round;
             } else if (Gameboard.playerX == 1) {
                 if (document.getElementById('name2').value == '') {
-                    document.getElementById('winText').innerHTML = 'Computer is the winner of round ' + `${round}` + '!';
+                    document.getElementById('winText').innerHTML = 'Computer is the winner of round ' + `${Gameboard.round}` + '!';
                 } else {
-                  document.getElementById('winText').innerHTML = `${document.getElementById('name2').value}` + ' is the winner of round ' + `${round}` + '!';  
+                  document.getElementById('winText').innerHTML = `${document.getElementById('name2').value}` + ' is the winner of round ' + `${Gameboard.round}` + '!';  
                 }
                 board.classList.add('masc');
-                ++p2Wins
+                ++Gameboard.p2Wins
                 Gameboard.playerX = 0
-                ++round;
+                ++Gameboard.round;
             }
         } else if (
             ary[0] == 'O' && ary[1] == 'O' && ary[2] == 'O' ||
@@ -64,16 +66,22 @@ const Gameboard = (() => {
             ary[2] == 'O' && ary[5] == 'O' && ary[8] == 'O' ||
             ary[0] == 'O' && ary[4] == 'O' && ary[8] == 'O' ||
             ary[2] == 'O' && ary[4] == 'O' && ary[6] == 'O') {
-            if (playerX == 0) {
-                document.getElementById('winText').innerHTML = `${document.getElementById('name2').value}` + ' is the winner of round ' + `${round}` + '!';
+            if (Gameboard.playerX == 0) {
+                if (document.getElementById('name2').value == '') {
+                    document.getElementById('winText').innerHTML = 'Computer is the winner of round ' + `${Gameboard.round}` + '!';
+                } else {
+                  document.getElementById('winText').innerHTML = `${document.getElementById('name2').value}` + ' is the winner of round ' + `${Gameboard.round}` + '!';  
+                }
                 board.classList.add('masc');
-                ++p2Wins
+                ++Gameboard.p2Wins
                 Gameboard.playerX = 1;
-            } else if (playerX == 1) {
-                document.getElementById('winText').innerHTML = `${document.getElementById('name1').value}` + ' is the winner of round ' + `${round}` + '!';
+                ++Gameboard.round;
+            } else if (Gameboard.playerX == 1) {
+                document.getElementById('winText').innerHTML = `${document.getElementById('name1').value}` + ' is the winner of round ' + `${Gameboard.round}` + '!';
                 board.classList.add('masc');
-                ++p1Wins;
+                ++Gameboard.p1Wins;
                 Gameboard.playerX = 0
+                ++Gameboard.round;
             }
         } else if (ary[0] != '' && ary[1] != '' && ary[2] != '' && ary[3] != '' && ary[4] != '' && ary[5] != '' && ary[6] != '' && ary[7] != '' && ary[8] != '') {
                 document.getElementById('winText').innerHTML = 'Tie, press Reset Game to play again.'
@@ -121,16 +129,16 @@ const Gameboard = (() => {
             p1ScoreName.innerHTML = `${document.getElementById('name1').value}`;
             p2ScoreName.innerHTML = 'Computer';
             
-            p1Score.innerHTML = `${p1Wins}`;
-            p2Score.innerHTML = `${p2Wins}`;
-            roundCounter.innerHTML = `${round}`;
+            p1Score.innerHTML = `${Gameboard.p1Wins}`;
+            p2Score.innerHTML = `${Gameboard.p2Wins}`;
+            roundCounter.innerHTML = `${Gameboard.round}`;
         } else if (name1.value != '' && name2.value != '') {
             p1ScoreName.innerHTML = `${document.getElementById('name1').value}`;
             p2ScoreName.innerHTML = `${document.getElementById('name2').value}`;
             
-            p1Score.innerHTML = `${p1Wins}`;
-            p2Score.innerHTML = `${p2Wins}`;
-            roundCounter.innerHTML = `${round}`;
+            p1Score.innerHTML = `${Gameboard.p1Wins}`;
+            p2Score.innerHTML = `${Gameboard.p2Wins}`;
+            roundCounter.innerHTML = `${Gameboard.round}`;
         }
     }
 
@@ -161,7 +169,35 @@ const Gameboard = (() => {
         PlayGame.x = 0;
     }
 
-    return { checkForWinner, ary, resetGame, changeName, switchToHuman, checkForWinner, switchToComp, setScoreBoard, playerX };
+    const gameWinner = () => {
+        if (Gameboard.p1Wins === 4) {
+            restartDiv.style.display = 'flex';
+            document.getElementById('gameWinText').innerHTML = `${document.getElementById('name1').value}` + ' is the winner of the game!';
+        } else if (Gameboard.p2Wins === 4) {
+            if (name2Label.innerHTML == 'Computer') {
+                restartDiv.style.display = 'flex';
+                document.getElementById('gameWinText').innerHTML = 'Computer is the winner of the game!';
+            } else {
+              restartDiv.style.display = 'flex';
+              document.getElementById('gameWinText').innerHTML = `${document.getElementById('name2').value}` + ' is the winner of the game!';
+            }
+        } else return; 
+    }
+
+    return {    checkForWinner, 
+                ary, 
+                resetGame, 
+                changeName, 
+                switchToHuman, 
+                checkForWinner, 
+                switchToComp, 
+                setScoreBoard, 
+                playerX, 
+                gameWinner,
+                p1Wins,
+                p2Wins,
+                round
+            };
 })();
 
 const PlayGame = (() => {
@@ -193,6 +229,26 @@ const PlayGame = (() => {
         const cellP8 = document.getElementById('cellP8');
         const cellP9 = document.getElementById('cellP9');
     
+    const restartGame = () => {
+        restartDiv.style.display = 'none';
+        start.classList.remove('masc');
+        Gameboard.resetGame();
+        Gameboard.round = 1;
+        Gameboard.p1Wins = 0;
+        Gameboard.p2Wins = 0;
+        name1Label.style.display = 'block';
+        name1.style.display = 'block';
+        p1NameP.innerHTML = '';
+        p2NameP.style.display = 'block';
+        name2.style.display = 'block';
+        name2Label.innerHTML = '';
+        p1Score.innerHTML = `${Gameboard.p1Wins}`;
+        p2Score.innerHTML = `${Gameboard.p2Wins}`;
+        roundCounter.innerHTML = `${Gameboard.round}`;
+        reset.classList.add('masc');
+        board.classList.add('masc');
+    }
+
     const click = () => {
         cells.forEach(cell => {
             cell.addEventListener('click', () => {
@@ -346,11 +402,12 @@ const PlayGame = (() => {
                     }
                 }
             Gameboard.checkForWinner();
+            Gameboard.gameWinner();
             Gameboard.setScoreBoard();
             })
         })
     }
-    return { click, x };
+    return { click, x, restartGame };
 })();
 
 const Player = (name, piece) => {
@@ -380,5 +437,10 @@ start.addEventListener('click', () => {
     p2 = Player(document.getElementById('name2').value);
     Gameboard.changeName();
     start.classList.add('masc');
+    reset.classList.remove('masc');
     Gameboard.setScoreBoard();
+})
+
+restartBtn.addEventListener('click', () => {
+    PlayGame.restartGame();
 })

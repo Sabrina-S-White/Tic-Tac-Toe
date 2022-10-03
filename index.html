@@ -9,11 +9,19 @@
     <script defer src="./main.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div id="gameRestart">
+        <div class="restartHov">
+            <div class="gameWinTextDiv">
+                <p id="gameWinText"></p>
+            </div>
+            <button type="button" class='hov' id="gameRestartBtn">Restart Game</button>
+        </div>
+    </div>
+    <div class="container" id="father">
         <div class="menu">
             <div class="buttons">
                 <button class='hov' type='button' id="start">Start Game</button>
-                <button class='hov' type='button' id="resetBtn">Reset Game</button>
+                <button class='hov masc' type='button' id="resetBtn">Reset Game</button>
             </div>
             <div class="playerContainer">
                 <div class="player">
