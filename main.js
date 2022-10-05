@@ -3,6 +3,10 @@ const start = document.getElementById('start');
 const restartBtn = document.getElementById('gameRestartBtn');
 const restartDiv = document.getElementById('gameRestart');
 
+// radio buttons to determine if computer or human mode is enabled
+const compChoice = document.getElementById('comp');
+const humanChoice = document.getElementById('human');
+
 const Gameboard = (() => {
     // Variables to control the flow of the game
     let round = 1;
@@ -121,6 +125,8 @@ const Gameboard = (() => {
             board.classList.remove('masc');
         } else {
             alert('Error, please enter names.');
+            start.classList.remove('masc');
+            reset.classList.add('masc');
         }
     }
 
@@ -404,10 +410,210 @@ const PlayGame = (() => {
             Gameboard.checkForWinner();
             Gameboard.gameWinner();
             Gameboard.setScoreBoard();
-            })
-        })
+            })})};
+
+    const playComp = () => {
+        cells.forEach(cell => {
+            cell.addEventListener('click', () => {
+                if (Gameboard.playerX == 0) {
+                    if(cell.id === cellOne.id) {
+                        if (Gameboard.ary[0] == '') {
+                        Gameboard.ary.splice(0, 1, 'X');
+                        cellP1.innerHTML = `${Gameboard.ary[0].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellTwo.id) {
+                        if (Gameboard.ary[1] == '') {
+                        Gameboard.ary.splice(1, 1, 'X');
+                        cellP2.innerHTML = `${Gameboard.ary[1].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellThree.id) {
+                        if (Gameboard.ary[2] == '') {
+                        Gameboard.ary.splice(2, 1, 'X');
+                        cellP3.innerHTML = `${Gameboard.ary[2].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellFour.id) {
+                        if (Gameboard.ary[3] == '') {
+                        Gameboard.ary.splice(3, 1, 'X');
+                        cellP4.innerHTML = `${Gameboard.ary[3].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellFive.id) {
+                        if (Gameboard.ary[4] == '') {
+                        Gameboard.ary.splice(4, 1, 'X');
+                        cellP5.innerHTML = `${Gameboard.ary[4].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellSix.id) {
+                        if (Gameboard.ary[5] == '') {
+                        Gameboard.ary.splice(5, 1, 'X');
+                        cellP6.innerHTML = `${Gameboard.ary[5].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellSeven.id) {
+                        if (Gameboard.ary[6] == '') {
+                        Gameboard.ary.splice(6, 1, 'X');
+                        cellP7.innerHTML = `${Gameboard.ary[6].toString()}`; 
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellEight.id) {
+                        if (Gameboard.ary[7] == '') {
+                        Gameboard.ary.splice(7, 1, 'X');
+                        cellP8.innerHTML = `${Gameboard.ary[7].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellNine.id) {
+                        if (Gameboard.ary[8] == '') {
+                        Gameboard.ary.splice(8, 1, 'X');
+                        cellP9.innerHTML = `${Gameboard.ary[8].toString()}`; 
+                        } else {
+                            return;
+                        }
+                    }
+                PlayGame.compMove();
+                } else if (Gameboard.playerX == 1) {
+                    if(cell.id === cellOne.id) {
+                        if (Gameboard.ary[0] == '') {
+                        Gameboard.ary.splice(0, 1, 'O');
+                        cellP1.innerHTML = `${Gameboard.ary[0].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellTwo.id) {
+                        if (Gameboard.ary[1] == '') {
+                        Gameboard.ary.splice(1, 1, 'O');
+                        cellP2.innerHTML = `${Gameboard.ary[1].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellThree.id) {
+                        if (Gameboard.ary[2] == '') {
+                        Gameboard.ary.splice(2, 1, 'O');
+                        cellP3.innerHTML = `${Gameboard.ary[2].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellFour.id) {
+                        if (Gameboard.ary[3] == '') {
+                        Gameboard.ary.splice(3, 1, 'O');
+                        cellP4.innerHTML = `${Gameboard.ary[3].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellFive.id) {
+                        if (Gameboard.ary[4] == '') {
+                        Gameboard.ary.splice(4, 1, 'O');
+                        cellP5.innerHTML = `${Gameboard.ary[4].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellSix.id) {
+                        if (Gameboard.ary[5] == '') {
+                        Gameboard.ary.splice(5, 1, 'O');
+                        cellP6.innerHTML = `${Gameboard.ary[5].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellSeven.id) {
+                        if (Gameboard.ary[6] == '') {
+                        Gameboard.ary.splice(6, 1, 'O');
+                        cellP7.innerHTML = `${Gameboard.ary[6].toString()}`; 
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellEight.id) {
+                        if (Gameboard.ary[7] == '') {
+                        Gameboard.ary.splice(7, 1, 'O');
+                        cellP8.innerHTML = `${Gameboard.ary[7].toString()}`;
+                        } else {
+                            return;
+                        }
+                    } else if (cell.id === cellNine.id) {
+                        if (Gameboard.ary[8] == '') {
+                        Gameboard.ary.splice(8, 1, 'O');
+                        cellP9.innerHTML = `${Gameboard.ary[8].toString()}`; 
+                        } else {
+                            return;
+                        }
+                }
+        }})})
+        PlayGame.compMove(); 
+        Gameboard.checkForWinner();
+        Gameboard.gameWinner();
+        Gameboard.setScoreBoard();
+    };
+
+    const compMove = () => {
+        let num = Math.floor(Math.random() * 9);
+        console.log(num);
+            if (Gameboard.playerX == 0) {
+                if (Gameboard.ary[num] == '') {
+                    Gameboard.ary.splice([num], 1, 'O');
+                    if (num == 0) {
+                        cellP1.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 1) {
+                        cellP2.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 2) {
+                        cellP3.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 3) {
+                        cellP4.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 4) {
+                        cellP5.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 5) {
+                        cellP6.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 6) {
+                        cellP7.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 7) {
+                        cellP8.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 8) {
+                        cellP9.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    }
+                } else compMove();
+            } else if (Gameboard.playerX == 1) {
+                if (Gameboard.ary[num] == '') {
+                    Gameboard.ary.splice([num], 1, 'X');
+                    if (num == 0) {
+                        cellP1.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 1) {
+                        cellP2.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 2) {
+                        cellP3.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 3) {
+                        cellP4.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 4) {
+                        cellP5.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 5) {
+                        cellP6.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 6) {
+                        cellP7.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 7) {
+                        cellP8.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    } else if (num == 8) {
+                        cellP9.innerHTML = `${Gameboard.ary[num].toString()}`;
+                    }
+                } else compMove();
+            }
+    };
+
+    const aiGamePlayHumanSwitcher = () => {
+        if (compChoice.checked) {
+            PlayGame.playComp();
+        } else if (!compChoice.checked) {
+            PlayGame.click();
+        }
     }
-    return { click, x, restartGame };
+
+    return { click, x, restartGame, aiGamePlayHumanSwitcher, playComp, compMove };
 })();
 
 const Player = (name, piece) => {
@@ -423,7 +629,7 @@ const Player = (name, piece) => {
 //Funnctions and button event listeners 
 Gameboard.switchToHuman();
 Gameboard.switchToComp();
-PlayGame.click();
+PlayGame.aiGamePlayHumanSwitcher();
 
 reset.addEventListener('click', () => {
     Gameboard.resetGame();
@@ -435,10 +641,10 @@ reset.addEventListener('click', () => {
 start.addEventListener('click', () => {
     p1 = Player(document.getElementById('name1').value);
     p2 = Player(document.getElementById('name2').value);
-    Gameboard.changeName();
     start.classList.add('masc');
     reset.classList.remove('masc');
     Gameboard.setScoreBoard();
+    Gameboard.changeName();
 })
 
 restartBtn.addEventListener('click', () => {
