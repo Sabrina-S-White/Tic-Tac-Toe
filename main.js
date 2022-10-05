@@ -546,7 +546,8 @@ const PlayGame = (() => {
                             return;
                         }
                 }
-        }})})
+        }
+        })})
         PlayGame.compMove(); 
         Gameboard.checkForWinner();
         Gameboard.gameWinner();
@@ -603,11 +604,15 @@ const PlayGame = (() => {
                     }
                 } else compMove();
             }
+            Gameboard.checkForWinner();
+            Gameboard.gameWinner();
+            Gameboard.setScoreBoard();
     };
 
     const aiGamePlayHumanSwitcher = () => {
         if (compChoice.checked) {
             PlayGame.playComp();
+            
         } else if (!compChoice.checked) {
             PlayGame.click();
         }
@@ -635,6 +640,9 @@ reset.addEventListener('click', () => {
     Gameboard.resetGame();
     p1 = Player(document.getElementById('name1').value);
     p2 = Player(document.getElementById('name2').value);
+    if (Gameboard.playerX == 1) {
+        PlayGame.compMove();
+    }
     return p1, p2;
 })
 
