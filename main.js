@@ -433,7 +433,6 @@ const PlayGame = (() => {
                     if (Gameboard.playerX == 0) {
 
                         //Remove playgame.x and just use Gameboard.playerX for computer switching? Currently am struggling to get player1 to have access to 'O' after first round vs comp. 
-                        if (PlayGame.x == 0) {
                             if(cell.id === cellOne.id) {
                                 if (Gameboard.ary[0] == '') {
                                 Gameboard.ary.splice(0, 1, 'X');
@@ -488,7 +487,7 @@ const PlayGame = (() => {
                             if (Gameboard.gameWon == 1) {
                                 Gameboard.plusRound();
                             } else return
-                        } else if (PlayGame.x == 1) {
+                    } else if (Gameboard.playerX == 1) {
                             if(cell.id === cellOne.id) {
                                 if (Gameboard.ary[0] == '') {
                                 Gameboard.ary.splice(0, 1, 'O');
@@ -565,13 +564,13 @@ const PlayGame = (() => {
                             Gameboard.checkForWinner();
                             Gameboard.gameWinner();
                             Gameboard.setScoreBoard();
+                            PlayGame.compMove();
                             if (Gameboard.gameWon == 1) {
                                 Gameboard.plusRound();
                             } else return
-                        } 
+                        } }
                     }
-                }
-            })})};
+            )})};
 
     // const playComp = () => {
     //     cells.forEach(cell => {
