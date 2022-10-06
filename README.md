@@ -35,7 +35,7 @@ DONE - 1. Change text color in name input fields
 
 DONE - 1. Make winner text popup look prettier
 
-1.  - STRETCH GOAL - Create a computer AI to play against that makes random moves. 
+DONE - 1. Create a computer AI to play against that makes random moves. 
         2ca. Take the available spaces in the ary, then randomly choose one to play.
 
 DONE - 1. Create a check for winner function in Gameboard. 

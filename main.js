@@ -1,3 +1,7 @@
+// TO DO 
+// Add a failsafe for compchoice when all options are played
+
+
 const reset = document.getElementById('resetBtn');
 const start = document.getElementById('start');
 const restartBtn = document.getElementById('gameRestartBtn');
@@ -6,7 +10,6 @@ const restartDiv = document.getElementById('gameRestart');
 // radio buttons to determine if computer or human mode is enabled
 const compChoice = document.getElementById('comp');
 const humanChoice = document.getElementById('human');
-const radio = document.querySelectorAll('.radio');
 
 const Gameboard = (() => {
     // Variable to enable computer mode 
@@ -22,6 +25,7 @@ const Gameboard = (() => {
     //Array to hold game moves
     let ary = ['','','','','','','','',''];
     
+    // Interactive elements and elements that are updated
     const cells = document.querySelectorAll('.cellP')
     const board = document.getElementById('board');
     const winText = document.getElementById('winText');
@@ -41,7 +45,8 @@ const Gameboard = (() => {
 
     // Functions 
 
-    // Checks for a winning game state
+    // Checks for a winning game state -- explore breaking the check for win functionality out 
+    // from the other stuff. Make a second function so you can check for wins multiple times without committing to updating the round etc. 
     const checkForWinner = () => {
         if (ary[0] == 'X' && ary[1] == 'X' && ary[2] == 'X' ||
             ary[3] == 'X' && ary[4] == 'X' && ary[5] == 'X' ||
@@ -56,7 +61,7 @@ const Gameboard = (() => {
                 board.classList.add('masc');
                 ++Gameboard.p1Wins;
                 Gameboard.playerX = 1;
-                ++Gameboard.round;
+                Gameboard.plusRound();
             } else if (Gameboard.playerX == 1) {
                 if (document.getElementById('name2').value == '') {
                     document.getElementById('winText').innerHTML = 'Computer is the winner of round ' + `${Gameboard.round}` + '!';
@@ -66,7 +71,7 @@ const Gameboard = (() => {
                 board.classList.add('masc');
                 ++Gameboard.p2Wins
                 Gameboard.playerX = 0
-                ++Gameboard.round;
+                Gameboard.plusRound();
             }
         } else if (
             ary[0] == 'O' && ary[1] == 'O' && ary[2] == 'O' ||
@@ -87,18 +92,21 @@ const Gameboard = (() => {
                 ++Gameboard.p2Wins
                 Gameboard.playerX = 1;
                 Gameboard.gameWon = 1;
+                Gameboard.plusRound();
             } else if (Gameboard.playerX == 1) {
                 document.getElementById('winText').innerHTML = `${document.getElementById('name1').value}` + ' is the winner of round ' + `${Gameboard.round}` + '!';
                 board.classList.add('masc');
                 ++Gameboard.p1Wins;
                 Gameboard.playerX = 0
                 Gameboard.gameWon = 1;
+                Gameboard.plusRound();
             }
         } else if (ary[0] != '' && ary[1] != '' && ary[2] != '' && ary[3] != '' && ary[4] != '' && ary[5] != '' && ary[6] != '' && ary[7] != '' && ary[8] != '') {
                 document.getElementById('winText').innerHTML = 'Tie, press Reset Game to play again.'
         }
     }
 
+    //Adds 1 to the round counter
     const plusRound = () => {
         ++Gameboard.round;
     }
@@ -484,9 +492,6 @@ const PlayGame = (() => {
                             Gameboard.setScoreBoard();
                             PlayGame.compMove();
                             PlayGame.x = 1;
-                            if (Gameboard.gameWon == 1) {
-                                Gameboard.plusRound();
-                            } else return
                     } else if (Gameboard.playerX == 1) {
                             if(cell.id === cellOne.id) {
                                 if (Gameboard.ary[0] == '') {
@@ -565,155 +570,11 @@ const PlayGame = (() => {
                             Gameboard.gameWinner();
                             Gameboard.setScoreBoard();
                             PlayGame.compMove();
-                            if (Gameboard.gameWon == 1) {
-                                Gameboard.plusRound();
-                            } else return
+                            console.log('andhereisthis');
                         } }
                     }
             )})};
-
-    // const playComp = () => {
-    //     cells.forEach(cell => {
-    //         cell.addEventListener('click', () => {
-    //             if (Gameboard.playerX == 0) {
-    //                 if(cell.id === cellOne.id) {
-    //                     if (Gameboard.ary[0] == '') {
-    //                     Gameboard.ary.splice(0, 1, 'X');
-    //                     cellP1.innerHTML = `${Gameboard.ary[0].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellTwo.id) {
-    //                     if (Gameboard.ary[1] == '') {
-    //                     Gameboard.ary.splice(1, 1, 'X');
-    //                     cellP2.innerHTML = `${Gameboard.ary[1].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellThree.id) {
-    //                     if (Gameboard.ary[2] == '') {
-    //                     Gameboard.ary.splice(2, 1, 'X');
-    //                     cellP3.innerHTML = `${Gameboard.ary[2].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellFour.id) {
-    //                     if (Gameboard.ary[3] == '') {
-    //                     Gameboard.ary.splice(3, 1, 'X');
-    //                     cellP4.innerHTML = `${Gameboard.ary[3].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellFive.id) {
-    //                     if (Gameboard.ary[4] == '') {
-    //                     Gameboard.ary.splice(4, 1, 'X');
-    //                     cellP5.innerHTML = `${Gameboard.ary[4].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellSix.id) {
-    //                     if (Gameboard.ary[5] == '') {
-    //                     Gameboard.ary.splice(5, 1, 'X');
-    //                     cellP6.innerHTML = `${Gameboard.ary[5].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellSeven.id) {
-    //                     if (Gameboard.ary[6] == '') {
-    //                     Gameboard.ary.splice(6, 1, 'X');
-    //                     cellP7.innerHTML = `${Gameboard.ary[6].toString()}`; 
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellEight.id) {
-    //                     if (Gameboard.ary[7] == '') {
-    //                     Gameboard.ary.splice(7, 1, 'X');
-    //                     cellP8.innerHTML = `${Gameboard.ary[7].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellNine.id) {
-    //                     if (Gameboard.ary[8] == '') {
-    //                     Gameboard.ary.splice(8, 1, 'X');
-    //                     cellP9.innerHTML = `${Gameboard.ary[8].toString()}`; 
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 }
-    //             PlayGame.compMove();
-    //             } else if (Gameboard.playerX == 1) {
-    //                 if(cell.id === cellOne.id) {
-    //                     if (Gameboard.ary[0] == '') {
-    //                     Gameboard.ary.splice(0, 1, 'O');
-    //                     cellP1.innerHTML = `${Gameboard.ary[0].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellTwo.id) {
-    //                     if (Gameboard.ary[1] == '') {
-    //                     Gameboard.ary.splice(1, 1, 'O');
-    //                     cellP2.innerHTML = `${Gameboard.ary[1].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellThree.id) {
-    //                     if (Gameboard.ary[2] == '') {
-    //                     Gameboard.ary.splice(2, 1, 'O');
-    //                     cellP3.innerHTML = `${Gameboard.ary[2].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellFour.id) {
-    //                     if (Gameboard.ary[3] == '') {
-    //                     Gameboard.ary.splice(3, 1, 'O');
-    //                     cellP4.innerHTML = `${Gameboard.ary[3].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellFive.id) {
-    //                     if (Gameboard.ary[4] == '') {
-    //                     Gameboard.ary.splice(4, 1, 'O');
-    //                     cellP5.innerHTML = `${Gameboard.ary[4].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellSix.id) {
-    //                     if (Gameboard.ary[5] == '') {
-    //                     Gameboard.ary.splice(5, 1, 'O');
-    //                     cellP6.innerHTML = `${Gameboard.ary[5].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellSeven.id) {
-    //                     if (Gameboard.ary[6] == '') {
-    //                     Gameboard.ary.splice(6, 1, 'O');
-    //                     cellP7.innerHTML = `${Gameboard.ary[6].toString()}`; 
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellEight.id) {
-    //                     if (Gameboard.ary[7] == '') {
-    //                     Gameboard.ary.splice(7, 1, 'O');
-    //                     cellP8.innerHTML = `${Gameboard.ary[7].toString()}`;
-    //                     } else {
-    //                         return;
-    //                     }
-    //                 } else if (cell.id === cellNine.id) {
-    //                     if (Gameboard.ary[8] == '') {
-    //                     Gameboard.ary.splice(8, 1, 'O');
-    //                     cellP9.innerHTML = `${Gameboard.ary[8].toString()}`; 
-    //                     } else {
-    //                         return;
-    //                     }
-    //             }
-    //     }
-    //     })})
-    //     PlayGame.compMove(); 
-    //     Gameboard.checkForWinner();
-    //     Gameboard.gameWinner();
-    //     Gameboard.setScoreBoard();
-    // };
-
+  
     const compMove = () => {
         let num = Math.floor(Math.random() * 9);
             if (Gameboard.playerX == 0) {
@@ -779,21 +640,25 @@ const Player = (name, piece) => {
 }
 
 //Funnctions and button event listeners 
+//Listens for the human radio button being clicked
 Gameboard.switchToHuman();
+//Listens for the computer radio button being clicked
 Gameboard.switchToComp();
+//Listens for player inputs 
 PlayGame.click();
 
-
+//Resets game after the first round is done
 reset.addEventListener('click', () => {
     Gameboard.resetGame();
     p1 = Player(document.getElementById('name1').value);
     p2 = Player(document.getElementById('name2').value);
-    if (Gameboard.playerX == 1) {
+    if (Gameboard.playerX == 1 && compChoice.checked) {
         PlayGame.compMove();
     }
     return p1, p2;
 })
 
+//Starts game, changes names
 start.addEventListener('click', () => {
     p1 = Player(document.getElementById('name1').value);
     p2 = Player(document.getElementById('name2').value);
@@ -803,6 +668,7 @@ start.addEventListener('click', () => {
     Gameboard.changeName();
 })
 
+//Restarts game when best of 7 is over
 restartBtn.addEventListener('click', () => {
     PlayGame.restartGame();
 })
